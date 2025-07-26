@@ -1,0 +1,96 @@
+body {
+  background-color: #f8f9fa;
+  margin: 0;
+}
+
+#wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+#sidebar {
+  width: 140px;
+  min-height: 100vh;
+}
+
+#content {
+  flex-grow: 1;
+  background-color: #f8f9fa;
+}
+
+.card-kpi {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: none;
+  border-radius: 16px;
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-right: 10px;
+  height: 100%;
+ 
+}
+
+canvas {
+  width: 100% !important;
+  height: auto !important;
+  max-width: 240px;
+  max-height: 240px;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 50px;
+
+
+}
+.nav-link:hover {
+  background-color: #495057;
+  border-radius: 8px;
+}
+
+/*para la leyenda personalizada*/
+
+.legend-custom {
+   display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 14px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.legend-custom span.badge {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  border-radius: 3px;
+  margin-right: 5px;
+}
+.grafico-pequeno {
+  max-width: 120px;
+  max-height: 120px;
+}
+/* Estilo para el gráfico ancho */
+.grafico-ancho {
+  width: 100% !important;
+  max-width: 100%;
+  height: auto !important;
+  aspect-ratio: 3 / 1; /* 3 veces más ancho que alto */
+  display: block;
+}
+
+  /* SIDEBAR */
+@media (min-width: 992px) {
+  #sidebar {
+    height: 100vh;
+    position: sticky;
+    width: 220px;
+    min-height: 100vh;
+    top: 0;
+  }
+}
+/* Ajusta el ancho del offcanvas */
+@media (max-width: 991.98px) {
+  #sidebarOffcanvas.offcanvas-start {
+    width: 220px !important; /* Puedes ajustar a 180px, 200px, etc. según tu gusto */
+  }
+}
