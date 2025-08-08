@@ -2227,6 +2227,7 @@
     <Content Include="lib\booststrap\bootstrap-icons-1.13.1\zoom-in.svg" />
     <Content Include="lib\booststrap\bootstrap-icons-1.13.1\zoom-out.svg" />
     <Content Include="lib\chartjs\chart.js" />
+    <Content Include="lib\chartjs\chartjs-plugin-datalabels.min.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -2281,6 +2282,7 @@
     <Content Include="lib\booststrap\bootstrap-icons-1.13.1\bootstrap-icons.scss" />
     <Content Include="lib\booststrap\bootstrap-icons-1.13.1\fonts\bootstrap-icons.woff" />
     <Content Include="lib\booststrap\bootstrap-icons-1.13.1\fonts\bootstrap-icons.woff2" />
+    <Content Include="pdf\dpf.pdf" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />

@@ -17,7 +17,7 @@
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <!-- Bootstrap 5 -->
 <link href="~/lib/booststrap/bootstrap-5.3.7-dist/css/bootstrap.min.css" rel="stylesheet" />
-
+<link href="~/lib/booststrap/bootstrap-icons-1.13.1/bootstrap-icons.css" />
 <!-- Tu CSS personalizado -->
 <link href="~/Content/style.css" rel="stylesheet" />
 
@@ -59,7 +59,7 @@
                 </div>
             </div>
         </nav>
-        <div class="container body-content">
+        <div class="container-fluid body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
@@ -71,17 +71,12 @@
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/Scripts/bootstrap.js") %>
          <%: Scripts.Render("~/lib/booststrap/bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js") %>
+         <%: Scripts.Render("~/lib/booststrap/bootstrap-5.3.7-dist/css/bootstrap.min.css") %>
          <%: Scripts.Render("~/lib/chartjs/chart.js") %>
+        <%: Scripts.Render("~/lib/chartjs/chartjs-plugin-datalabels.min.js") %>
          <%: Scripts.Render("~/Scripts/script.js") %>
     </asp:PlaceHolder>
     
-<!-- Bootstrap 5 Bundle (incluye Popper) -->
-<script src=""></script>
 
-<!-- Chart.js -->
-<script src=""></script>
-
-<!-- Tu script personalizado -->
-<script src=""></script>
 </body>
 </html>

@@ -66,16 +66,18 @@ canvas {
   margin-right: 5px;
 }
 .grafico-pequeno {
-  max-width: 120px;
-  max-height: 120px;
+    max-width: 120px;
+    max-height: 120px;
+    margin-bottom: 5px; /**/ /* Eliminar o comentar esta línea si no es necesario */
 }
 /* Estilo para el gráfico ancho */
+
 .grafico-ancho {
-  width: 100% !important;
-  max-width: 100%;
-  height: auto !important;
-  aspect-ratio: 3 / 1; /* 3 veces más ancho que alto */
-  display: block;
+    /* margin-block: 100px; */ /* Eliminar o comentar esta línea */
+    max-width: 100%;
+    margin-bottom:5px; /**/ /* Eliminar o comentar esta línea si no es necesario */
+    height: 350px; /* Dale una altura fija al canvas para que Chart.js tenga espacio */
+    display: block; /* Asegura que el canvas se comporte como un bloque para los márgenes */
 }
 
   /* SIDEBAR */
@@ -93,4 +95,24 @@ canvas {
   #sidebarOffcanvas.offcanvas-start {
     width: 220px !important; /* Puedes ajustar a 180px, 200px, etc. según tu gusto */
   }
+}
+
+/*AJUSTAR  LA BARRA COMO QUIERO */
+/*.chart-container {
+    position: relative;
+    height: 350px;*/ /* Le damos una altura fija para asegurar el espacio */
+/*}
+
+.card-body {
+    padding-bottom: 0 !important;*/ /* Elimina el padding de abajo para pegar el gráfico al borde inferior */
+/*}*/
+/*<!-- CÓDIGO CSS (puedes añadirlo en un archivo .css o en tu <head>) -->
+<style >*/
+
+
+.card-body {
+    padding-bottom: 0 !important; /* Mantenemos esto para que el gráfico se pegue al borde */
+    /*padding-top: 1.5rem;*/ /* 👈 ¡NUEVO! Añade padding superior para bajar el gráfico */
+    /* Si el card-body tiene un padding general, podrías ajustarlo así: */
+    /*padding: 1.5rem 1rem 0 1rem;*/  /* Ejemplo: padding superior 1.5rem, izquierdo, derecho de 1rem, inferior de 0 */
 }

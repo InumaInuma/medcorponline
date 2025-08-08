@@ -41,8 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AtencionesPorAptitud.cs" />
     <Compile Include="AtencionesPorGenero.cs" />
     <Compile Include="AtencionMesEntity.cs" />
+    <Compile Include="AtencionPorTipoEmo.cs" />
+    <Compile Include="AtendidosYNoAtendidos.cs" />
     <Compile Include="Auditoria.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="ClsOperador.cs" />

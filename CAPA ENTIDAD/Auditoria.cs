@@ -12,5 +12,7 @@ namespace CAPA_ENTIDAD
         public string Pacien{ get; set; }
         public string DesTCh { get; set; }
         public string Actitud { get; set; }
+        public int CodCli { get; set; }
+        public string NomCom { get; set; }
     }
 }
