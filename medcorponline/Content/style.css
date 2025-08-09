@@ -116,3 +116,37 @@ canvas {
     /* Si el card-body tiene un padding general, podrías ajustarlo así: */
     /*padding: 1.5rem 1rem 0 1rem;*/  /* Ejemplo: padding superior 1.5rem, izquierdo, derecho de 1rem, inferior de 0 */
 }
+
+/*
+PAGINACION */
+.pagination .page-link {
+    border-radius: 50% !important; /* Hace el círculo */
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    padding: 0;
+    margin: 0 5px;
+    font-weight: bold;
+    color: #007bff;
+    border: 1px solid #dee2e6;
+    background-color: white;
+    transition: all 0.3s ease;
+}
+
+    .pagination .page-link:hover {
+        background-color: #007bff;
+        color: white;
+    }
+
+.pagination .page-item.active .page-link {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+}
+
+.pagination .page-item.disabled .page-link {
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+    color: #6c757d;
+}

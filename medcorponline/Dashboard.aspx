@@ -177,107 +177,17 @@
             <asp:HiddenField ID="hfMasculino" runat="server" />
             <asp:HiddenField ID="hfFemenino" runat="server" />
          
-                    <!-- GENERO -->
-                   <%-- <div class="row mb-4">
-                        <!-- Tabla -->
-                        <div class="col-12 col-lg-6 mb-3 mb-lg-0">
-                            <div class="card card-kpi h-100">
-                                <div class="card-body">
-                                    <div class="card-header bg-primary text-white text-center py-2 rounded-top">
-                                        <h5 class="card-title mb-0">GÉNERO</h5>
-                                    </div>
-                                    <p></p>
-                                    <table class="table table-bordered text-center">
-                                        <thead class="table-primary ">
-                                            <tr>
-                                                <th>Género</th>
-                                                <th>Cantidad</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                           <asp:Literal ID="litTablaGenero" runat="server"></asp:Literal>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Gráficos -->
-                        <div class="col-12 col-lg-6">
-                            <div class="card card-kpi h-100">
-                                <div class="card-body">
-                                    <div class="card-header bg-primary text-white text-center py-2 rounded-top">
-                                        <h5 class="card-title mb-0">GÉNERO</h5>
-                                    </div>
-                                    <div class="row  p-1">
-                                        <div class="col-6 text-center">
-                                            <h6>MASCULINO</h6>
-                                            <canvas id="masculinoChart" class="grafico-pequeno"></canvas>
-                                        </div>
-                                        <div class="col-6 text-center">
-                                            <h6>FEMENINO</h6>
-                                            <canvas id="femeninoChart" class="grafico-pequeno"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>--%>
-                    <!-- ATENDIDOS NO ASISTIDOS -->
+                
+                 
                     <!-- Fila horizontal con dos cards lado a lado -->
                       <asp:HiddenField ID="hfAtendido" runat="server" />
                       <asp:HiddenField ID="hfNoAtendidos" runat="server" />
                       <asp:HiddenField ID="hfTotalATen" runat="server" />
-                   <%-- <div class="row mb-4">
-                        <!-- Tabla -->
-                        <div class="col-12 col-lg-6 mb-3 mb-lg-0">
-                            <div class="card card-kpi h-100">
-                                <div class="card-body">
-                                    <div class="card-header bg-primary text-white text-center py-2 rounded-top">
-                                        <h5 class="card-title mb-0">ATENCIONES</h5>
-                                    </div>
-                                    <p></p>
-                                    <table class="table table-bordered text-center">
-                                        <thead class="table-primary">
-                                            <tr>
-                                                <th>ATENCIONES</th>
-                                                <th>Cantidad</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                         <asp:Literal ID="litTablaAsistidos" runat="server"></asp:Literal>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Gráficos -->
-                        <!-- Atendidos vs No Asistidos -->
-                        <div class="col-12 col-lg-6">
-                            <div class="card card-kpi h-100">
-                                <div class="card-body">
-                                    <div class="card-header bg-primary text-white text-center py-2 rounded-top">
-                                        <h5 class="card-title mb-0">ATENCIONES</h5>
-                                    </div>
-                                    <div class="row  p-1">
-                                        <!-- Atendidos -->
-                                        <div class="col-6 text-center">
-                                            <h6>ATENDIDOS</h6>
-                                            <canvas id="asistenciasChartAtendidos" class="grafico-pequeno"></canvas>
-                                        </div>
-                                        <!-- No Atendidos -->
-                                        <div class="col-6 text-center">
-                                            <h6>NO ASISTIDOS</h6>
-                                            <canvas id="asistenciasChartNoAsistidos" class="grafico-pequeno"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>--%>
-
+              
+            
+                    
                     <div class="row mb-4">
+                        <!-- GENERO -->
                          <div class="col-12 col-lg-6 mb-3 mb-lg-0">
                              <div class="card card-kpi h-100">
                                  <div class="card-body">
@@ -292,8 +202,8 @@
                                              <table class="table table-bordered text-center">
                                                  <thead class="table-primary">
                                                      <tr>
-                                                         <th>Género</th>
-                                                         <th>Cantidad</th>
+                                                         <th>GÉNERO</th>
+                                                         <th>CANTIDAD</th>
                                                      </tr>
                                                  </thead>
                                                  <tbody>
@@ -318,7 +228,7 @@
                                  </div>
                              </div>
                          </div>
-                    
+                       <!-- ATENDIDOS NO ASISTIDOS -->
                     <!-- Repite lo mismo para la otra card en la fila -->
                          <div class="col-12 col-lg-6">
                              <div class="card card-kpi h-100">
@@ -335,7 +245,7 @@
                                                  <thead class="table-primary">
                                                      <tr>
                                                          <th>ATENCIONES</th>
-                                                         <th>Cantidad</th>
+                                                         <th>CANTIDAD</th>
                                                      </tr>
                                                  </thead>
                                                  <tbody>
@@ -361,56 +271,16 @@
                          </div>
                     </div>
 
-                    <!-- TIPO DE EMO -->
+                  
                       <asp:HiddenField ID="hfPre" runat="server" />
                       <asp:HiddenField ID="hfEgreso" runat="server" />
                       <asp:HiddenField ID="hfAnual" runat="server" />
                       <asp:HiddenField ID="hfTotal" runat="server" />
-                <%--    <div class="row mb-4">
-                        <!-- Tabla -->
-                        <div class="col-12 col-lg-6 mb-3 mb-lg-0">
-                            <div class="card card-kpi h-100">
-                                <div class="card-body">
-                                    <div class="card-header bg-primary text-white text-center py-2 rounded-top">
-                                        <h5 class="card-title mb-0">EMO</h5>
-                                    </div>
-                                    <p></p>
-                                    <table class="table table-bordered text-center">
-                                        <thead class="table-primary">
-                                            <tr>
-                                                <th>Tipo</th>
-                                                <th>Cantidad</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                           <asp:Literal ID="litTablaTipoEMO" runat="server"></asp:Literal>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Gráficos -->
-                        <div class="col-12 col-lg-6">
-                            <div class="card card-kpi h-100">
-                                <div class="card-body">
-                                    <div class="card-header bg-primary text-white text-center py-2 rounded-top">
-                                        <h5 class="card-title mb-0">EMO</h5>
-                                    </div>
-                                    <div class="row  p-1">
-                                        <div class="col-6 col-lg-4 text-center mb-3">
-                                            <h6>PRE</h6>
-                                            <canvas id="emoChartPre" class="grafico-pequeno"></canvas>
-                                        </div>
-                                       
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>--%>
+             
                     
                        <div class="row mb-4">
-                            <div class="col-12 col-lg-6">
+                             <!-- TIPO DE EMO -->
+                            <div class="col-12 col-lg-6 mb-3 mb-lg-0">
                                 <div class="card card-kpi h-100">
                                     
                                     <div class="card-body">
@@ -423,8 +293,8 @@
                                                 <table class="table table-bordered text-center mb-0">
                                                     <thead class="table-primary">
                                                         <tr>
-                                                            <th>Tipo</th>
-                                                            <th>Cantidad</th>
+                                                            <th>TIPO</th>
+                                                            <th>CANTIDAD</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -445,6 +315,8 @@
                                     </div>
                                 </div>
                             </div>
+                           
+                             <!-- APTITUD -->
                             <div class="col-12 col-lg-6">
                             <div class="card card-kpi h-100">
                                 
@@ -458,8 +330,8 @@
                                             <table class="table table-bordered text-center mb-0">
                                                 <thead class="table-primary">
                                                     <tr>
-                                                        <th>Aptitud</th>
-                                                        <th>Cantidad</th>
+                                                        <th>APTITUD</th>
+                                                        <th>CANTIDAD</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -481,54 +353,12 @@
                             </div>
                     </div>
 
-            <!-- APTITUD -->
                        <asp:HiddenField ID="hfApto" runat="server" />
                        <asp:HiddenField ID="hfAptoRes" runat="server" />
                        <asp:HiddenField ID="hfNoApto" runat="server" />
                        <asp:HiddenField ID="hfObservado" runat="server" />
                        <asp:HiddenField ID="hfTotalApt" runat="server" />
-                  <%--  <div class="row mb-4">
-                        <!-- Tabla -->
-                        <div class="col-12 col-lg-6 mb-3 mb-lg-0">
-                            <div class="card card-kpi h-100">
-                                <div class="card-body">
-                                    <div class="card-header bg-primary text-white text-center py-2 rounded-top">
-                                        <h5 class="card-title mb-0">APTITUD</h5>
-                                    </div>
-                                    <p></p>
-                                    <table class="table table-bordered text-center">
-                                        <thead class="table-primary">
-                                            <tr>
-                                                <th>Aptitud</th>
-                                                <th>Cantidad</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                           <asp:Literal ID="litTablaAptitudes" runat="server"></asp:Literal>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Gráficos -->
-                        <div class="col-12 col-lg-6">
-                            <div class="card card-kpi h-100">
-                                <div class="card-body">
-                                    <div class="card-header bg-primary text-white text-center py-2 rounded-top">
-                                        <h5 class="card-title mb-0">APTITUD</h5>
-                                    </div>
-                                    <div class="row p-1">
-                                        <div class="col-6 col-lg-3 text-center mb-4">
-                                            <h6>APTO</h6>
-                                            <canvas id="aptitudChartApto" class="grafico-pequeno"></canvas>
-                                        </div>
-                                       
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>--%>
+               
         
 
             <!-- Modal PDF -->
@@ -540,7 +370,7 @@
                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                    </div>
                    <div class="modal-body p-0">
-                     <iframe id="pdfViewer" src="" width="100%" height="600px" style="border:none;"></iframe>
+                     <iframe id="pdfViewer" src="" width="100%" height="570px" style="border:none;"></iframe>
                    </div>
                  </div>
                </div>

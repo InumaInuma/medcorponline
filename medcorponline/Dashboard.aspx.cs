@@ -64,7 +64,7 @@ namespace medcorponline
             DateTime? fechaInicioDT = null;
             DateTime? fechaFinDT = null;
             int idEmpresaSeleccionada = 0;
-            string rutaPdf = ResolveUrl("~/pdf/dpf.pdf");
+            //string rutaPdf = ResolveUrl("~/pdf/dpf.pdf");
 
             // Leer los valores de los filtros directamente desde la URL.
             string fechaInicioStr = Request.QueryString["fechaInicio"];
@@ -89,6 +89,7 @@ namespace medcorponline
             // que establecimos en el Page_Load, o los que el usuario haya seleccionado.
             fechaInicio.Value = fechaInicioStr ?? fechaInicio.Value;
             fechaFin.Value = fechaFinStr ?? fechaFin.Value;
+
             if (empresa != null)
             {
                 empresa.Value = idEmpresaStr ?? "";
@@ -144,6 +145,9 @@ namespace medcorponline
             StringBuilder sb = new StringBuilder();
             foreach (var item in lista)
             {
+                string rutaPdf = ResolveUrl(item.Pacien);
+                bool bloqueado = item.Actitud?.Trim().ToUpper() == "OBSERVADO";
+
                 sb.Append("<tr>");
                 sb.AppendFormat("<td>{0}</td>", item.FecAte.ToString("dd/MM/yyyy"));
                 sb.AppendFormat("<td>{0}</td>", item.Pacien);
@@ -157,13 +161,24 @@ namespace medcorponline
                 // Botón PDF (abre en otra pestaña)
                 // Botón que abre modal con el PDF
                 // Botón que abre modal
-                // Botón que llama a la función JS pasando la ruta del PDF
-                sb.AppendFormat(
-                    "<td><button type='button' class='btn btn-sm btn-danger' onclick=\"verPdf('{0}')\">📄<i class='bi bi-file-earmark-excel-fill'></i></button></td>",
-                    rutaPdf
-                );
+                //// Botón que llama a la función JS pasando la ruta del PDF
+                //sb.AppendFormat(
+                //    "<td><button type='button' class='btn btn-sm btn-success' onclick=\"verPdf('{0}')\">📄<i class='bi bi-file-earmark-excel-fill'></i></button></td>",
+                //    rutaPdf
+                //);
+                // Botón PDF (deshabilitado si está observado)
+                if (bloqueado)
+                {
+                    sb.Append("<td><button type='button' class='btn btn-sm btn-secondary' disabled>📄</button></td>");
+                }
+                else
+                {
+                    sb.AppendFormat(
+                        "<td><button type='button' class='btn btn-sm btn-success' onclick=\"verPdf('{0}')\">📄</button></td>",
+                        rutaPdf
+                    );
+                }
 
-               
                 sb.Append("</tr>");
             }
             litTabla.Text = sb.ToString();
@@ -191,7 +206,7 @@ namespace medcorponline
 
             string prevDisabled = (pageIndex == 1) ? "disabled" : "";
             sb.Append($"<li class='page-item {prevDisabled}'>");
-            sb.Append($"<a class='page-link' href='{urlBase}&page={pageIndex - 1}' tabindex='-1' aria-disabled='true'>Anterior</a></li>");
+            sb.Append($"<a class='page-link' href='{urlBase}&page={pageIndex - 1}' tabindex='-1' aria-disabled='true'>&laquo;</a></li>");
 
             for (int i = 1; i <= totalPages; i++)
             {
@@ -201,7 +216,7 @@ namespace medcorponline
 
             string nextDisabled = (pageIndex == totalPages) ? "disabled" : "";
             sb.Append($"<li class='page-item {nextDisabled}'>");
-            sb.Append($"<a class='page-link' href='{urlBase}&page={pageIndex + 1}'>Siguiente</a></li>");
+            sb.Append($"<a class='page-link' href='{urlBase}&page={pageIndex + 1}'>&raquo;</a></li>");
 
             sb.Append("</ul>");
 
@@ -355,17 +370,27 @@ namespace medcorponline
             hfData.Value = string.Join(",", atencionesPorMes);
         }
         #endregion
+
+
         #region TABLA Y GRAFICO DE GENERO
         private void CargarDatosGeneroTable()
         {
             List<AtencionesPorGenero> lista = negocio.ListarAtencionesPorGeneroB();
             StringBuilder sb = new StringBuilder();
 
+            // Colores asociados al género (mismo que en el gráfico)
+            Dictionary<string, string> coloresTexto = new Dictionary<string, string>
+            {
+                { "M", "#36A2EB" }, // Azul
+                { "F", "#FF6384" }  // Rosado
+            };
+
             foreach (var item in lista)
             {
+                string color = coloresTexto.ContainsKey(item.Genero) ? coloresTexto[item.Genero] : "#000000";
                 sb.Append("<tr>");
-                sb.AppendFormat("<td>{0}</td>", item.Genero);
-                sb.AppendFormat("<td>{0}</td>", item.Cantidad);
+                sb.AppendFormat("<td style='color:{0}; font-weight:bold'>{1}</td>", color, item.Genero);
+                sb.AppendFormat("<td style='color:{0}; font-weight:bold'>{1}</td>", color, item.Cantidad);
                 sb.Append("</tr>");
             }
             // litTablaGenero donde insertar el HTML generado
@@ -391,11 +416,20 @@ namespace medcorponline
             List<AtencionPorTipoEmo> lista = negocio.ListarAtencionesPorTipoEmoB();
             StringBuilder sb = new StringBuilder();
 
+            // Colores asociados al género (mismo que en el gráfico)
+            Dictionary<string, string> coloresTexto = new Dictionary<string, string>
+            {
+                { "PRE", "rgba(37, 43, 245, 0.8)" }, // Azul
+                { "EGRESO", "rgba(0, 0, 248, 0.47)" },  // Rosado
+                { "ANUAL", "rgba(9, 9, 125, 0.95)" }  // Rosado
+            };
+
             foreach (var item in lista)
             {
+                string color = coloresTexto.ContainsKey(item.TipoEMO) ? coloresTexto[item.TipoEMO] : "#000000";
                 sb.Append("<tr>");
-                sb.AppendFormat("<td>{0}</td>", item.TipoEMO);
-                sb.AppendFormat("<td>{0}</td>", item.Total);
+                sb.AppendFormat("<td style='color:{0}; font-weight:bold'>{1}</td>", color, item.TipoEMO);
+                sb.AppendFormat("<td style='color:{0}; font-weight:bold'>{1}</td>", color, item.Total);
                 sb.Append("</tr>");
             }
             // litTablaGenero donde insertar el HTML generado
@@ -426,11 +460,21 @@ namespace medcorponline
             List<AtencionesPorAptitud> lista = negocio.ListarAtencionesPorTipoAptitudB();
             StringBuilder sb = new StringBuilder();
 
+            // Colores asociados al género (mismo que en el gráfico)  "rgba(37, 43, 245, 0.8)", "rgba(0, 0, 248, 0.47)","rgba(9, 9, 125, 0.95)","rgb(54, 162, 235)"
+            Dictionary<string, string> coloresTexto = new Dictionary<string, string>
+            {
+                { "APTO", "rgba(37, 43, 245, 0.8)" }, // Azul
+                { "APTO RES", "rgba(0, 0, 248, 0.47)" },  // Rosado
+                { "NO APTO", "rgba(9, 9, 125, 0.95)" },  // Rosado
+                { "OBSERVADO", "rgb(54, 162, 235)" }
+            };
+
             foreach (var item in lista)
             {
+                string color = coloresTexto.ContainsKey(item.Aptitud) ? coloresTexto[item.Aptitud] : "#000000";
                 sb.Append("<tr>");
-                sb.AppendFormat("<td>{0}</td>", item.Aptitud);
-                sb.AppendFormat("<td>{0}</td>", item.Total);
+                sb.AppendFormat("<td style='color:{0}; font-weight:bold'>{1}</td>", color, item.Aptitud);
+                sb.AppendFormat("<td style='color:{0}; font-weight:bold'>{1}</td>", color, item.Total);
                 sb.Append("</tr>");
             }
             // litTablaGenero donde insertar el HTML generado
@@ -455,6 +499,7 @@ namespace medcorponline
             hfObservado.Value = observado.ToString();
 
         }
+
         #endregion
         #region TABLA Y GRAFICO DE ATENDIDOS Y NO ANTENDIDOS
         private void CargarDatosTipoAtendidosYNoAtendidosGraficos()
@@ -479,15 +524,23 @@ namespace medcorponline
             List<AtendidosYNoAtendidos> lista = negocio.ObtenerAtencionesPorTipoAtencionYNoAtendidosB();
             StringBuilder sb = new StringBuilder();
 
+            // Colores asociados al género (mismo que en el gráfico)
+            Dictionary<string, string> coloresTexto = new Dictionary<string, string>
+            {
+                { "ATENDIDO", "#36A2EB" }, // Azul
+                { "NO ATENDIDO", "#FF6384" }  // Rosado
+            };
+
             foreach (var item in lista)
             {
+                string color = coloresTexto.ContainsKey(item.EstadoAtencion) ? coloresTexto[item.EstadoAtencion] : "#000000";
                 sb.Append("<tr>");
-                sb.AppendFormat("<td>{0}</td>", item.EstadoAtencion);
-                sb.AppendFormat("<td>{0}</td>", item.Total);
+                sb.AppendFormat("<td style='color:{0}; font-weight:bold'>{1}</td>", color, item.EstadoAtencion);
+                sb.AppendFormat("<td style='color:{0}; font-weight:bold'>{1}</td>", color, item.Total);
                 sb.Append("</tr>");
             }
             // litTablaGenero donde insertar el HTML generado
-            //litTablaAsistidos.Text = sb.ToString();
+            litTablaAsistidos.Text = sb.ToString();
         }
         #endregion
 
@@ -516,72 +569,10 @@ namespace medcorponline
             }
         }
 
-        //private void CargarTabla()
-        //{
-        //    List<Auditoria> lista = negocio.ListarAuditoriaB(new List<ClsOperador>(), new List<ClsOperador>());
-
-        //    StringBuilder sb = new StringBuilder();
-
-        //    foreach (var item in lista)
-        //    {
-        //        sb.Append("<tr>");
-        //        sb.AppendFormat("<td>{0}</td>", item.FecAte.ToString("dd/MM/yyyy"));
-        //        sb.AppendFormat("<td>{0}</td>", item.Pacien);
-        //        sb.AppendFormat("<td>{0}</td>", item.DesTCh);
-        //        sb.AppendFormat("<td>{0}</td>", item.Actitud);
-        //        sb.Append("<td><i class='bi bi-file-earmark-excel fs-5 text-success'></i></td>");
-        //        sb.Append("</tr>");
-        //    }
-
-        //    // Literal donde insertar el HTML generado
-        //    litTabla.Text = sb.ToString();
-        //}
-
+        
         #endregion
 
 
-        //private void CargarTablaFiltrada()
-        //{
-        //    DateTime? fechaInicioDT = null;
-        //    DateTime? fechaFinDT = null;
-
-        //    // Captura como string
-        //    string fechaInicioStr = fechaInicio.Value;
-        //    string fechaFinStr = fechaFin.Value;
-        //    var idEmpresaSeleccionada = string.IsNullOrEmpty(empresa.Value) ? 0 : Convert.ToInt32(empresa.Value);
-        //    // Valida y convierte
-        //    if (!string.IsNullOrEmpty(fechaInicioStr))
-        //    {
-        //        fechaInicioDT = Convert.ToDateTime(fechaInicioStr);
-        //    }
-
-        //    if (!string.IsNullOrEmpty(fechaFinStr))
-        //    {
-        //        fechaFinDT = Convert.ToDateTime(fechaFinStr);
-        //    }
-
-
-        //    List<Auditoria> lista = negocio.ListarAtencionesFiltradasB(fechaInicioDT, fechaFinDT, idEmpresaSeleccionada);
-
-
-        //    StringBuilder sb = new StringBuilder();
-
-        //    foreach (var item in lista)
-        //    {
-        //        sb.Append("<tr>");
-        //        sb.AppendFormat("<td>{0}</td>", item.FecAte.ToString("dd/MM/yyyy"));
-        //        sb.AppendFormat("<td>{0}</td>", item.Pacien);
-        //        sb.AppendFormat("<td>{0}</td>", item.DesTCh);
-        //        sb.AppendFormat("<td>{0}</td>", item.Actitud);
-        //        sb.Append("<td><i class='bi bi-file-earmark-excel fs-5 text-success'></i></td>");
-        //        sb.Append("</tr>");
-        //    }
-
-        //    litTabla.Text = sb.ToString();
-
-
-
-        //}
-
+        
     }
 }

@@ -8,15 +8,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const femenino = window.femenino || 0;
     const total = window.totalGenero || (masculino + femenino);
 
+    const porcentajeMasculino = ((masculino / total) * 100).toFixed(2);
+    const porcentajeFemenino = ((femenino / total) * 100).toFixed(2);
+
     new Chart(document.getElementById("masculinoChart"), {
         type: "doughnut",
         data: {
-            labels: ["MASCULINO","FEMENINO"],
+            labels: ["M (♂)","F (♀)"],
             datasets: [
                 {
-                    data: [masculino, total - masculino],
-                    backgroundColor: ['rgb(255, 99, 132)',
-                        'rgb(54, 162, 235)'],
+                    data: [porcentajeMasculino, porcentajeFemenino],
+                    backgroundColor: ['rgb(54, 162, 235)', 'rgb(255, 99, 132)'],
                     borderWidth: 0,
                     hoverOffset: 4,
                     borderWidth: 3,
@@ -25,8 +27,6 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         options: {
             responsive: true,
-            
-           
             plugins: {
                 legend: {
                     display: false,
@@ -38,50 +38,57 @@ document.addEventListener("DOMContentLoaded", function () {
                         usePointStyle: true, // íconos tipo punto en lugar de cuadrados
                         textAlign: "center",
                     },
-                },
+                },      
                 tooltip: {
                     enabled: true,
+                    callbacks: {
+                        label: function (context) {
+                            return context.label + ": " + context.parsed.toFixed(2) + "%";
+                        }
+                    }
                 },
             },
         },
     });
 
-    new Chart(document.getElementById("femeninoChart"), {
-        type: "doughnut",
-        data: {
-            labels: ["FEMENINO"],
-            datasets: [
-                {
-                    data: [femenino, total - femenino],
-                    backgroundColor: ["#E91E63", "#e0e0e0"],
-                    borderWidth: 0,
-                    hoverOffset: 4,
-                    borderWidth: 3,
-                },
-            ],
-        },
-        options: {
-            responsive: true,
-            rotation: -90,
-            circumference: 180,
-            plugins: {
-                legend: {
-                    display: true,
-                    position: "bottom",
-                    align: "center",
-                    labels: {
-                        boxWidth: 10,
-                        padding: 15,
-                        usePointStyle: true, // íconos tipo punto en lugar de cuadrados
-                        textAlign: "center",
-                    },
-                },
-                tooltip: {
-                  enabled: true,
-              },
-            },
-        },
-    });
+    //new Chart(document.getElementById("femeninoChart"), {
+    //    type: "doughnut",
+    //    data: {
+    //        labels: ["FEMENINO"],
+    //        datasets: [
+    //            {
+    //                data: [femenino, total - femenino],
+    //                backgroundColor: ["#E91E63", "#e0e0e0"],
+    //                borderWidth: 0,
+    //                hoverOffset: 4,
+    //                borderWidth: 3,
+    //            },
+    //        ],
+    //    },
+    //    options: {
+    //        responsive: true,
+    //        rotation: -90,
+    //        circumference: 180,
+    //        plugins: {
+    //            legend: {
+    //                display: true,
+    //                position: "bottom",
+    //                align: "center",
+    //                labels: {
+    //                    boxWidth: 10,
+    //                    padding: 15,
+    //                    usePointStyle: true, // íconos tipo punto en lugar de cuadrados
+    //                    textAlign: "center",
+    //                },
+    //            },
+    //            tooltip: {
+    //              enabled: true,
+    //          },
+    //        },
+    //    },
+    //});
+
+
 });
 // Doughnut: ATENDIDOS  Y NO ATENDIDOS
 document.addEventListener("DOMContentLoaded", function () {
@@ -89,15 +96,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const noatendidos = window.noatendidos || 0;
     const totalatenn = window.totalaten || (atendido + noatendidos);
 
+    const porcentajeAtendido = ((atendido / totalatenn) * 100).toFixed(2);
+    const porcentajeNoatendidos = ((noatendidos / totalatenn) * 100).toFixed(2);
+
     new Chart(document.getElementById("asistenciasChartAtendidos"), {
          type: "doughnut",
          data: {
-           labels: ["ATENDIDOS", "NO ATENDIDOS"],
+           labels: ["ATEN", "NO ATEN"],
            datasets: [
              {
-               data: [atendido, noatendidos],
-               backgroundColor: ['rgb(255, 99, 132)',
-                                 'rgb(54, 162, 235)'],
+               data: [porcentajeAtendido, porcentajeNoatendidos],
+                   backgroundColor: ['rgb(54, 162, 235)', 'rgb(255, 99, 132)'],
                borderWidth: 0,
                hoverOffset: 4,
                borderWidth: 3,
@@ -119,7 +128,12 @@ document.addEventListener("DOMContentLoaded", function () {
                },
              },
              tooltip: {
-               enabled: true,
+                 enabled: true,
+                 callbacks: {
+                     label: function (context) {
+                         return context.label + ": " + context.parsed.toFixed(2) + "%";
+                     }
+                 }
                },
                datalabels: {
                    display: false, // ¡CLAVE! Mostrar los labels para este dataset 
@@ -153,41 +167,41 @@ document.addEventListener("DOMContentLoaded", function () {
         plugins: [ChartDataLabels] // Activa el plugin aquí
       });
 ////Doughnut: No Asistidos
-    new Chart(document.getElementById("asistenciasChartNoAsistidos"), {
-           type: "doughnut",
-           data: {
-             labels: ["NO ASISTIDOS"],
-             datasets: [
-               {
-                 data: [noatendidos, totalatenn - noatendidos],
-                 backgroundColor: ["#E91E63", "#e0e0e0"],
-                 borderWidth: 0,
-                 hoverOffset: 4,
-                 borderWidth: 3,
+    //new Chart(document.getElementById("asistenciasChartNoAsistidos"), {
+    //       type: "doughnut",
+    //       data: {
+    //         labels: ["NO ASISTIDOS"],
+    //         datasets: [
+    //           {
+    //             data: [noatendidos, totalatenn - noatendidos],
+    //             backgroundColor: ["#E91E63", "#e0e0e0"],
+    //             borderWidth: 0,
+    //             hoverOffset: 4,
+    //             borderWidth: 3,
 
-               },
-             ],
-           },
-           options: {
-             responsive: true,
-             plugins: {
-               legend: {
-                 display: true,
-                 position: "bottom",
-                 align: "center",
-                 labels: {
-                   boxWidth: 10,
-                   padding: 15,
-                   usePointStyle: true, // íconos tipo punto en lugar de cuadrados
-                   textAlign: "center",
-                 },
-               },
-               tooltip: {
-                 enabled: true,
-               },
-             },
-         },
-      });
+    //           },
+    //         ],
+    //       },
+    //       options: {
+    //         responsive: true,
+    //         plugins: {
+    //           legend: {
+    //             display: true,
+    //             position: "bottom",
+    //             align: "center",
+    //             labels: {
+    //               boxWidth: 10,
+    //               padding: 15,
+    //               usePointStyle: true, // íconos tipo punto en lugar de cuadrados
+    //               textAlign: "center",
+    //             },
+    //           },
+    //           tooltip: {
+    //             enabled: true,
+    //           },
+    //         },
+    //     },
+    //  });
 });
 // Doughnut: TIPOS DE EMOOOOOOOO
 
@@ -198,13 +212,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const anual = window.anual || 0;
     const total = window.total || (pre + egreso + anual);
 
+    const porcentajePre = ((pre / total) * 100).toFixed(2);
+    const porcentajeEgreso = ((egreso / total) * 100).toFixed(2);
+    const porcentajeAnual = ((anual / total) * 100).toFixed(2);
+
+
     new Chart(document.getElementById("emoChartPre"), {
         type: "doughnut",
         data: {
             labels: ["PRE","EGRESO","ANUAL"],
             datasets: [
                 {
-                    data: [pre, egreso , anual],
+                    data: [porcentajePre, porcentajeEgreso, porcentajeAnual],
                     backgroundColor: ["rgba(37, 43, 245, 0.8)", "rgba(0, 0, 248, 0.47)",
                        "rgba(9, 9, 125, 0.95)"],
                     borderWidth: 0,
@@ -229,83 +248,88 @@ document.addEventListener("DOMContentLoaded", function () {
                 },
                 tooltip: {
                     enabled: true,
+                    callbacks: {
+                        label: function (context) {
+                            return context.label + ": " + context.parsed.toFixed(2) + "%";
+                        }
+                    }
                 },
             },
         },
     });
 
     // Doughnut: Tipo de EGRESO
-    new Chart(document.getElementById("emoChartEgreso"), {
-        type: "doughnut",
-        data: {
-            labels: ["EGRESO"],
-            datasets: [
-                {
-                    data: [egreso, total - egreso],
-                    backgroundColor: ["#dce91eff", "#e0e0e0"],
-                    borderWidth: 0,
-                    hoverOffset: 4,
-                    borderWidth: 3,
-                },
-            ],
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    display: true,
-                    position: "bottom",
-                    align: "center",
-                    labels: {
-                        boxWidth: 10,
-                        padding: 15,
-                        usePointStyle: true, // íconos tipo punto en lugar de cuadrados
-                        textAlign: "center",
-                        // Esto evitará que se apilen por ancho
-                    },
-                },
-                tooltip: {
-                    enabled: true,
-                },
-            },
-        },
-    });
+    //new Chart(document.getElementById("emoChartEgreso"), {
+    //    type: "doughnut",
+    //    data: {
+    //        labels: ["EGRESO"],
+    //        datasets: [
+    //            {
+    //                data: [egreso, total - egreso],
+    //                backgroundColor: ["#dce91eff", "#e0e0e0"],
+    //                borderWidth: 0,
+    //                hoverOffset: 4,
+    //                borderWidth: 3,
+    //            },
+    //        ],
+    //    },
+    //    options: {
+    //        responsive: true,
+    //        plugins: {
+    //            legend: {
+    //                display: true,
+    //                position: "bottom",
+    //                align: "center",
+    //                labels: {
+    //                    boxWidth: 10,
+    //                    padding: 15,
+    //                    usePointStyle: true, // íconos tipo punto en lugar de cuadrados
+    //                    textAlign: "center",
+    //                    // Esto evitará que se apilen por ancho
+    //                },
+    //            },
+    //            tooltip: {
+    //                enabled: true,
+    //            },
+    //        },
+    //    },
+    //});
 
     //Doughnut: Tipo de ANUAL
-    new Chart(document.getElementById("emoChartAnual"), {
-        type: "doughnut",
-        data: {
-            labels: ["ANUAL"],
-            datasets: [
-                {
-                    data: [anual, total - anual],
-                    backgroundColor: ["#14ec55ff", "#e0e0e0"],
-                    borderWidth: 0,
-                    hoverOffset: 4,
-                    borderWidth: 3,
-                },
-            ],
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    display: true,
-                    position: "bottom",
-                    align: "center",
-                    labels: {
-                        boxWidth: 10,
-                        padding: 15,
-                        usePointStyle: true, // íconos tipo punto en lugar de cuadrados
-                        textAlign: "center",
-                    },
-                },
-                tooltip: {
-                    enabled: true,
-                },
-            },
-        },
-    });
+    //new Chart(document.getElementById("emoChartAnual"), {
+    //    type: "doughnut",
+    //    data: {
+    //        labels: ["ANUAL"],
+    //        datasets: [
+    //            {
+    //                data: [anual, total - anual],
+    //                backgroundColor: ["#14ec55ff", "#e0e0e0"],
+    //                borderWidth: 0,
+    //                hoverOffset: 4,
+    //                borderWidth: 3,
+    //            },
+    //        ],
+    //    },
+    //    options: {
+    //        responsive: true,
+    //        plugins: {
+    //            legend: {
+    //                display: true,
+    //                position: "bottom",
+    //                align: "center",
+    //                labels: {
+    //                    boxWidth: 10,
+    //                    padding: 15,
+    //                    usePointStyle: true, // íconos tipo punto en lugar de cuadrados
+    //                    textAlign: "center",
+    //                },
+    //            },
+    //            tooltip: {
+    //                enabled: true,
+    //            },
+    //        },
+    //    },
+    //});
 
 
 });
@@ -319,14 +343,19 @@ document.addEventListener("DOMContentLoaded", function () {
     const observado = window.observado || 0;
     const totalapt = window.totalapt || (apto + aptores + noapto + observado);
 
+    const porcentajeApto = ((apto / totalapt) * 100).toFixed(2);
+    const porcentajeAptores = ((aptores / totalapt) * 100).toFixed(2);
+    const porcentajeNoapto = ((noapto / totalapt) * 100).toFixed(2);
+    const porcentajeObservado = ((observado / totalapt) * 100).toFixed(2);
+
     // Doughnut: Aptitud APTO
     new Chart(document.getElementById("aptitudChartApto"), {
         type: "doughnut",
         data: {
-            labels: ["APTO","APTO RES","NO APTO","OBSERVADO"],
+            labels: ["APTO","APT RES","NO APTO","OBSER"],
             datasets: [
                 {
-                    data: [apto, aptores , noapto,observado],
+                    data: [porcentajeApto, porcentajeAptores, porcentajeNoapto, porcentajeObservado],
                     backgroundColor: ["rgba(37, 43, 245, 0.8)", "rgba(0, 0, 248, 0.47)",
                         "rgba(9, 9, 125, 0.95)","rgb(54, 162, 235)"],
                     borderWidth: 0,
@@ -353,127 +382,132 @@ document.addEventListener("DOMContentLoaded", function () {
                 },
                 tooltip: {
                     enabled: true,
+                    callbacks: {
+                        label: function (context) {
+                            return context.label + ": " + context.parsed.toFixed(2) + "%";
+                        }
+                    }
                 },
             },
         },
     });
 
     // Doughnut: Aptitud APTO RES
-    new Chart(document.getElementById("aptitudChartAptoRes"), {
-        type: "doughnut",
-        data: {
-            labels: ["APTO RES"],
-            datasets: [
-                {
-                    data: [aptores, totalapt - aptores],
-                    backgroundColor: ["#da5c08ff", "#e0e0e0"],
-                    borderWidth: 0,
-                    hoverOffset: 4,
-                    borderWidth: 3,
-                },
-            ],
-        },
+    //new Chart(document.getElementById("aptitudChartAptoRes"), {
+    //    type: "doughnut",
+    //    data: {
+    //        labels: ["APTO RES"],
+    //        datasets: [
+    //            {
+    //                data: [aptores, totalapt - aptores],
+    //                backgroundColor: ["#da5c08ff", "#e0e0e0"],
+    //                borderWidth: 0,
+    //                hoverOffset: 4,
+    //                borderWidth: 3,
+    //            },
+    //        ],
+    //    },
 
-        options: {
-            responsive: true,
-            rotation: -90,
-            circumference: 180,
-            plugins: {
-                legend: {
-                    display: true,
-                    position: "bottom",
-                    align: "center",
-                    labels: {
-                        boxWidth: 10,
-                        padding: 15,
-                        usePointStyle: true, // íconos tipo punto en lugar de cuadrados
-                        textAlign: "center",
-                    },
-                },
-                tooltip: {
-                    enabled: true,
-                },
-            },
-        },
-    });
+    //    options: {
+    //        responsive: true,
+    //        rotation: -90,
+    //        circumference: 180,
+    //        plugins: {
+    //            legend: {
+    //                display: true,
+    //                position: "bottom",
+    //                align: "center",
+    //                labels: {
+    //                    boxWidth: 10,
+    //                    padding: 15,
+    //                    usePointStyle: true, // íconos tipo punto en lugar de cuadrados
+    //                    textAlign: "center",
+    //                },
+    //            },
+    //            tooltip: {
+    //                enabled: true,
+    //            },
+    //        },
+    //    },
+    //});
 
     // Doughnut: Aptitud NO APTO
-    new Chart(document.getElementById("aptitudChartNoApto"), {
-        type: "doughnut",
-        data: {
-            labels: ["NO APTO"],
-            datasets: [
-                {
-                    data: [noapto, totalapt - noapto],
-                    backgroundColor: ["#af2e93ff", "#e0e0e0"],
-                    borderWidth: 0,
-                    hoverOffset: 4,
-                    borderWidth: 3,
-                },
-            ],
-        },
+    //new Chart(document.getElementById("aptitudChartNoApto"), {
+    //    type: "doughnut",
+    //    data: {
+    //        labels: ["NO APTO"],
+    //        datasets: [
+    //            {
+    //                data: [noapto, totalapt - noapto],
+    //                backgroundColor: ["#af2e93ff", "#e0e0e0"],
+    //                borderWidth: 0,
+    //                hoverOffset: 4,
+    //                borderWidth: 3,
+    //            },
+    //        ],
+    //    },
 
-        options: {
-            responsive: true,
-            rotation: -90,
-            circumference: 180,
-            plugins: {
-                legend: {
-                    display: true,
-                    position: "bottom",
-                    align: "center",
-                    labels: {
-                        boxWidth: 10,
-                        padding: 15,
-                        usePointStyle: true, // íconos tipo punto en lugar de cuadrados
-                        textAlign: "center",
-                    },
-                },
-                tooltip: {
-                    enabled: true,
-                },
-            },
-        },
-    });
+    //    options: {
+    //        responsive: true,
+    //        rotation: -90,
+    //        circumference: 180,
+    //        plugins: {
+    //            legend: {
+    //                display: true,
+    //                position: "bottom",
+    //                align: "center",
+    //                labels: {
+    //                    boxWidth: 10,
+    //                    padding: 15,
+    //                    usePointStyle: true, // íconos tipo punto en lugar de cuadrados
+    //                    textAlign: "center",
+    //                },
+    //            },
+    //            tooltip: {
+    //                enabled: true,
+    //            },
+    //        },
+    //    },
+    //});
 
     // Doughnut: Aptitud OBSERVADO
-    new Chart(document.getElementById("aptitudChartObservado"), {
-        type: "doughnut",
-        data: {
-            labels: ["OBSERVADO"],
-            datasets: [
-                {
-                    data: [observado, totalapt - observado],
-                    backgroundColor: ["#c98c1cff", "#e0e0e0"],
-                    borderWidth: 0,
-                    hoverOffset: 4,
-                    borderWidth: 3,
-                },
-            ],
-        },
+    //new Chart(document.getElementById("aptitudChartObservado"), {
+    //    type: "doughnut",
+    //    data: {
+    //        labels: ["OBSERVADO"],
+    //        datasets: [
+    //            {
+    //                data: [observado, totalapt - observado],
+    //                backgroundColor: ["#c98c1cff", "#e0e0e0"],
+    //                borderWidth: 0,
+    //                hoverOffset: 4,
+    //                borderWidth: 3,
+    //            },
+    //        ],
+    //    },
 
-        options: {
-            responsive: true,
-            rotation: -90,
-            circumference: 180,
-            plugins: {
-                legend: {
-                    display: true,
-                    position: "bottom",
-                    align: "center",
-                    labels: {
-                        boxWidth: 10,
-                        padding: 15,
-                        usePointStyle: true, // íconos tipo punto en lugar de cuadrados
-                        textAlign: "center",
-                    },
-                },
-                tooltip: {
-                    enabled: true,
-                },
-            },
-        },
-    });
+    //    options: {
+    //        responsive: true,
+    //        rotation: -90,
+    //        circumference: 180,
+    //        plugins: {
+    //            legend: {
+    //                display: true,
+    //                position: "bottom",
+    //                align: "center",
+    //                labels: {
+    //                    boxWidth: 10,
+    //                    padding: 15,
+    //                    usePointStyle: true, // íconos tipo punto en lugar de cuadrados
+    //                    textAlign: "center",
+    //                },
+    //            },
+    //            tooltip: {
+    //                enabled: true,
+    //            },
+    //        },
+    //    },
+    //});
 
 
 

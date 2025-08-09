@@ -71,7 +71,7 @@
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/Scripts/bootstrap.js") %>
          <%: Scripts.Render("~/lib/booststrap/bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js") %>
-         <%: Scripts.Render("~/lib/booststrap/bootstrap-5.3.7-dist/css/bootstrap.min.css") %>
+    
          <%: Scripts.Render("~/lib/chartjs/chart.js") %>
         <%: Scripts.Render("~/lib/chartjs/chartjs-plugin-datalabels.min.js") %>
          <%: Scripts.Render("~/Scripts/script.js") %>
