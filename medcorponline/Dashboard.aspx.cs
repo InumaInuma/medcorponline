@@ -25,7 +25,7 @@ namespace medcorponline
         protected Literal litPaginacion;
 
         // Parámetros de paginación
-        private const int pageSize = 15; // Ahora con 2 registros por página, según tu pedido
+        private const int pageSize = 10; // Ahora con 2 registros por página, según tu pedido
         private int pageIndex = 1; // Índice de página actual, comienza en 1
 
         protected void Page_Load(object sender, EventArgs e)
@@ -169,7 +169,7 @@ namespace medcorponline
                 // Botón PDF (deshabilitado si está observado)
                 if (bloqueado)
                 {
-                    sb.Append("<td><button type='button' class='btn btn-sm btn-secondary' disabled>📄</button></td>");
+                    sb.Append("<td></td>");
                 }
                 else
                 {
@@ -204,9 +204,33 @@ namespace medcorponline
 
             string urlBase = $"Dashboard.aspx?fechaInicio={HttpUtility.UrlEncode(fechaInicio)}&fechaFin={HttpUtility.UrlEncode(fechaFin)}&idEmpresa={HttpUtility.UrlEncode(idEmpresa)}"; /* */
 
+
+            //string prevDisabled = (pageIndex == 1) ? "disabled" : "";
+            //sb.Append(string.Format("<li style='font-size: 15px;' class='page-item {0}'>", prevDisabled));
+            //sb.Append(string.Format("<a class='page-link d-flex justify-content-center align-items-center' href='{0}&page={1}' tabindex='-1' aria-disabled='true'>", urlBase, pageIndex - 1));
+            //sb.Append("<img src='/lib/img/ImgDerV5.png' alt='Anterior' style='width:40px; height:40px;'>");
+            //sb.Append("</a></li>");
+
+            //for (int i = 1; i <= totalPages; i++)
+            //{
+            //    string activeClass = (i == pageIndex) ? "active" : "";
+            //    sb.Append(string.Format("<li class='page-item {0}'><a class='page-link' href='{1}&page={2}'>{2}</a></li>", activeClass, urlBase, i));
+            //}
+
+            //string nextDisabled = (pageIndex == totalPages) ? "disabled" : "";
+            //sb.Append(string.Format("<li class='page-item {0}'>", nextDisabled));
+            //sb.Append(string.Format("<a class='page-link d-flex justify-content-center align-items-center' href='{0}&page={1}'>", urlBase, pageIndex + 1));
+            //sb.Append("<img src='/lib/img/ImgIzqV5.png' alt='Siguiente' style='width:40px; height:40px;'>");
+            //sb.Append("</a></li>");
+
+            //sb.Append("</ul>");
+
+
             string prevDisabled = (pageIndex == 1) ? "disabled" : "";
-            sb.Append($"<li class='page-item {prevDisabled}'>");
-            sb.Append($"<a class='page-link' href='{urlBase}&page={pageIndex - 1}' tabindex='-1' aria-disabled='true'>&laquo;</a></li>");
+            sb.Append($"<li style='font-size: 15px;' class='page-item {prevDisabled}'>");
+            sb.Append($"<a class='page-link d-flex justify-content-center align-items-center' href='{urlBase}&page={pageIndex - 1}' tabindex='-1' aria-disabled='true'>");
+            sb.Append("<img src='/lib/img/ImgDerV55.png' alt='Anterior' style='width:38px; height:38px;'>");
+            sb.Append("</a></li>");
 
             for (int i = 1; i <= totalPages; i++)
             {
@@ -216,7 +240,9 @@ namespace medcorponline
 
             string nextDisabled = (pageIndex == totalPages) ? "disabled" : "";
             sb.Append($"<li class='page-item {nextDisabled}'>");
-            sb.Append($"<a class='page-link' href='{urlBase}&page={pageIndex + 1}'>&raquo;</a></li>");
+            sb.Append($"<a class='page-link d-flex justify-content-center align-items-center' href='{urlBase}&page={pageIndex + 1}'>");
+            sb.Append("<img src='/lib/img/ImgIzqV55.png' alt='Siguiente' style='width:38px; height:38px;'>");
+            sb.Append("</a></li>");
 
             sb.Append("</ul>");
 
@@ -419,9 +445,9 @@ namespace medcorponline
             // Colores asociados al género (mismo que en el gráfico)
             Dictionary<string, string> coloresTexto = new Dictionary<string, string>
             {
-                { "PRE", "rgba(37, 43, 245, 0.8)" }, // Azul
-                { "EGRESO", "rgba(0, 0, 248, 0.47)" },  // Rosado
-                { "ANUAL", "rgba(9, 9, 125, 0.95)" }  // Rosado
+                { "PRE", "rgb(54, 162, 235)" }, // Azul
+                { "EGRESO", "rgb(255, 99, 132)" },  // Rosado
+                { "ANUAL", "rgb(255, 206, 86)" }  // Rosado
             };
 
             foreach (var item in lista)
@@ -463,10 +489,10 @@ namespace medcorponline
             // Colores asociados al género (mismo que en el gráfico)  "rgba(37, 43, 245, 0.8)", "rgba(0, 0, 248, 0.47)","rgba(9, 9, 125, 0.95)","rgb(54, 162, 235)"
             Dictionary<string, string> coloresTexto = new Dictionary<string, string>
             {
-                { "APTO", "rgba(37, 43, 245, 0.8)" }, // Azul
-                { "APTO RES", "rgba(0, 0, 248, 0.47)" },  // Rosado
-                { "NO APTO", "rgba(9, 9, 125, 0.95)" },  // Rosado
-                { "OBSERVADO", "rgb(54, 162, 235)" }
+                { "APTO", "rgb(54, 162, 235)" }, // Azul
+                { "APTO RES", "rgb(255, 99, 132)" },  // Rosado
+                { "NO APTO", "rgb(255, 206, 86)" },  // Rosado
+                { "OBSERVADO", "rgb(75, 192, 192)" }
             };
 
             foreach (var item in lista)

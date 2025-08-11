@@ -51,15 +51,6 @@ namespace medcorponline
         protected global::System.Web.UI.WebControls.Literal litMensajeError;
 
         /// <summary>
-        /// Control litTabla.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litTabla;
-
-        /// <summary>
         /// Control hfData.
         /// </summary>
         /// <remarks>
@@ -184,6 +175,15 @@ namespace medcorponline
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litTablaAptitudes;
+
+        /// <summary>
+        /// Control litTabla.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litTabla;
 
         /// <summary>
         /// Control hfApto.

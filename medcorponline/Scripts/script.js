@@ -224,8 +224,9 @@ document.addEventListener("DOMContentLoaded", function () {
             datasets: [
                 {
                     data: [porcentajePre, porcentajeEgreso, porcentajeAnual],
-                    backgroundColor: ["rgba(37, 43, 245, 0.8)", "rgba(0, 0, 248, 0.47)",
-                       "rgba(9, 9, 125, 0.95)"],
+                    backgroundColor: ['rgb(54, 162, 235)',  // Azul
+                        'rgb(255, 99, 132)',  // Rosa fuerte
+                        'rgb(255, 206, 86)'],
                     borderWidth: 0,
                     hoverOffset: 4,
                     borderWidth: 3,
@@ -356,8 +357,10 @@ document.addEventListener("DOMContentLoaded", function () {
             datasets: [
                 {
                     data: [porcentajeApto, porcentajeAptores, porcentajeNoapto, porcentajeObservado],
-                    backgroundColor: ["rgba(37, 43, 245, 0.8)", "rgba(0, 0, 248, 0.47)",
-                        "rgba(9, 9, 125, 0.95)","rgb(54, 162, 235)"],
+                    backgroundColor: ['rgb(54, 162, 235)',  // Azul
+                        'rgb(255, 99, 132)',  // Rosa fuerte
+                        'rgb(255, 206, 86)',  // Amarillo cálido
+                        'rgb(75, 192, 192)'],
                     borderWidth: 0,
                     hoverOffset: 4,
                     borderWidth: 3,
@@ -548,9 +551,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 {
                     label: "Atenciones",
                     data: dataDesdeServidor, // Usamos los datos pasados a la función
-                    backgroundColor: "rgba(54, 162, 235, 0.6)", // Opacidad aumentada
-                    borderColor: "rgba(54, 162, 235, 1)",
+                    backgroundColor: "#BCBEC0", // Opacidad aumentada
+                    borderColor: "#7C8087",
                     borderWidth: 1,
+                    barPercentage: 0.6,       // 👈 Aquí
+                    categoryPercentage: 0.6,  // 👈 Aquí
                     // Configuración del plugin datalabels para este dataset de barras
                     datalabels: {
                         display: true, // ¡CLAVE! Mostrar los labels para este dataset 
@@ -565,6 +570,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         },
                         backgroundColor: "rgba(255, 255, 255, 0.8)",
                         borderRadius: 6,
+                        
                         padding: {
                             top: 6,
                             bottom: 4,
@@ -586,10 +592,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     display: false,
                     data: dataDesdeServidor,
                     borderColor: "rgb(54, 162, 235)",
-                    borderWidth: 4,
+                    borderWidth: 1,
                     fill: false,
                     
-                    pointRadius: 6,
+                    pointRadius: 2,
                     datalabels: {
                         display: false // NO mostrar labels para el dataset de línea
                     }
@@ -631,7 +637,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         minRotation: 0,
                         padding: 10 // Espacio entre el label del eje X y la barra
                     }, // ✅ Muestra etiquetas del eje X
-                    offset: true // Desplaza las barras y labels ligeramente del borde
+                    offset: true, // Desplaza las barras y labels ligeramente del borde
                 },
                 y: {
                     grid: { display: false }, // ❌ Oculta líneas del eje Y

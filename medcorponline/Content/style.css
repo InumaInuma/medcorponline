@@ -77,7 +77,7 @@ canvas {
     max-width: 100%;
     margin-bottom:5px; /**/ /* Eliminar o comentar esta línea si no es necesario */
     height: 350px; /* Dale una altura fija al canvas para que Chart.js tenga espacio */
-    display: block; /* Asegura que el canvas se comporte como un bloque para los márgenes */
+    /*display: block;*/ /* Asegura que el canvas se comporte como un bloque para los márgenes */
 }
 
   /* SIDEBAR */
@@ -150,3 +150,35 @@ PAGINACION */
     border-color: #dee2e6;
     color: #6c757d;
 }
+
+/*
+BORDER DE TABLAS Y COLOR*/
+.custom-header {
+    background-color: #2AA4DD;
+    color: white;
+}
+
+.table {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+    .table thead th {
+        border-bottom: 2px solid #ddd;
+    }
+
+    .table tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .table tbody tr:hover {
+        background-color: #eef6fc;
+        transition: 0.2s;
+    }
+    .table thead tr th {
+        background-color: #2AA4DD;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+        border: 1px solid #2AA4DD !important;
+    }
