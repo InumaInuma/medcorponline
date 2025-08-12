@@ -334,8 +334,11 @@
                                                    </ul>--%>
                                   <%--  <asp:Literal ID="litPaginacion" runat="server"></asp:Literal>--%>
                                   <!-- Aquí se renderiza la paginación generada en el código-behind -->
-                                  <asp:Literal ID="litPaginacion" runat="server"></asp:Literal>
-
+                                 
+                                  <div style="overflow-x: auto; white-space: nowrap;">
+                                      <!-- ul de la paginación aquí -->
+                                       <asp:Literal ID="litPaginacion" runat="server"></asp:Literal>
+                                  </div>
                               </nav>
                           </div>
                       </div>

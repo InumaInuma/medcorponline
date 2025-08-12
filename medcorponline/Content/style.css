@@ -151,6 +151,17 @@ PAGINACION */
     color: #6c757d;
 }
 
+.pagination {
+    overflow-x: auto;
+    white-space: nowrap;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+    .pagination li {
+        flex: 0 0 auto;
+    }
+
 /*
 BORDER DE TABLAS Y COLOR*/
 .custom-header {

@@ -23,9 +23,9 @@ namespace medcorponline
         // Literal para la tabla y la paginación
         //protected Literal litTabla;
         protected Literal litPaginacion;
-
+        int totalRecords;
         // Parámetros de paginación
-        private const int pageSize = 10; // Ahora con 2 registros por página, según tu pedido
+        private const int pageSize = 5; // Ahora con 2 registros por página, según tu pedido
         private int pageIndex = 1; // Índice de página actual, comienza en 1
 
         protected void Page_Load(object sender, EventArgs e)
@@ -64,6 +64,7 @@ namespace medcorponline
             DateTime? fechaInicioDT = null;
             DateTime? fechaFinDT = null;
             int idEmpresaSeleccionada = 0;
+            
             //string rutaPdf = ResolveUrl("~/pdf/dpf.pdf");
 
             // Leer los valores de los filtros directamente desde la URL.
@@ -132,7 +133,13 @@ namespace medcorponline
             }
 
             // --- Lógica de Paginación ---
-            int totalRecords = negocio.ContarAtencionesFiltradasB(fechaInicioDT, fechaFinDT, idEmpresaSeleccionada);
+            //int totalRecords = negocio.ContarAtencionesFiltradasB(fechaInicioDT, fechaFinDT, idEmpresaSeleccionada);
+
+            // Llamar al método de negocio y obtener también el total
+            
+            List<Auditoria> lista = negocio.ListarAtencionesFiltradasConPaginacionB(
+                fechaInicioDT, fechaFinDT, idEmpresaSeleccionada, pageIndex, pageSize, out totalRecords
+            );
             // Calcular el total de páginas basado en el número total de registros y el tamaño de página.
             int totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
            
@@ -140,7 +147,7 @@ namespace medcorponline
             if (pageIndex > totalPages && totalPages > 0) pageIndex = totalPages;
                 
             // Llamar al método de negocio con los parámetros de paginación.
-            List<Auditoria> lista = negocio.ListarAtencionesFiltradasConPaginacionB(fechaInicioDT, fechaFinDT, idEmpresaSeleccionada, pageIndex, pageSize);
+            //List<Auditoria> lista = negocio.ListarAtencionesFiltradasConPaginacionB(fechaInicioDT, fechaFinDT, idEmpresaSeleccionada, pageIndex, pageSize);
 
             StringBuilder sb = new StringBuilder();
             foreach (var item in lista)
@@ -227,21 +234,55 @@ namespace medcorponline
 
 
             string prevDisabled = (pageIndex == 1) ? "disabled" : "";
-            sb.Append($"<li style='font-size: 15px;' class='page-item {prevDisabled}'>");
-            sb.Append($"<a class='page-link d-flex justify-content-center align-items-center' href='{urlBase}&page={pageIndex - 1}' tabindex='-1' aria-disabled='true'>");
-            sb.Append("<img src='/lib/img/ImgDerV55.png' alt='Anterior' style='width:38px; height:38px;'>");
+            sb.Append($"<li class='page-item {prevDisabled}'>");
+            //sb.Append($"<a class='page-link d-flex justify-content-center align-items-center' href='{urlBase}&page={pageIndex - 1}' tabindex='-1' aria-disabled='true'>");
+            //sb.Append("<img src='/lib/img/ImgDerV55.png' alt='Anterior' style='width:38px; height:38px;'>");
             sb.Append("</a></li>");
 
-            for (int i = 1; i <= totalPages; i++)
+            // Botón scroll izquierda si hay más páginas antes
+            if (pageIndex > 6)
+            {
+                sb.Append($"<li class='page-item'><a class='page-link d-flex justify-content-center align-items-center' href='{urlBase}&page={pageIndex - 3}'tabindex='-1' aria-disabled='true'>");
+                sb.Append("<img src='/lib/img/ImgDerV55.png' alt='Anterior' style='width:38px; height:38px;'>");
+                sb.Append("</a></li>");
+            }
+
+            // Calcular rango de páginas visibles
+            int startPage = Math.Max(1, pageIndex - 3);
+            int endPage = Math.Min(totalPages, startPage + 5);
+
+            // Ajustar para que siempre muestre 6 páginas si es posible
+            if (endPage - startPage < 5)
+            {
+                startPage = Math.Max(1, endPage - 5);
+            }
+
+            for (int i = startPage; i <= endPage; i++)
             {
                 string activeClass = (i == pageIndex) ? "active" : "";
                 sb.Append($"<li class='page-item {activeClass}'><a class='page-link' href='{urlBase}&page={i}'>{i}</a></li>");
             }
 
+
+
+            // Botón scroll derecha si hay más páginas después
+            if (endPage < totalPages)
+            {
+                sb.Append($"<li class='page-item'><a class='page-link d-flex justify-content-center align-items-center' href='{urlBase}&page={pageIndex + 3}'>");
+                sb.Append("<img src='/lib/img/ImgIzqV55.png' alt='Siguiente' style='width:38px; height:38px;'>");
+                sb.Append("</a></li>");
+            }
+            //for (int i = 1; i <= totalPages; i++)
+            //{
+            //    string activeClass = (i == pageIndex) ? "active" : "";
+            //    sb.Append($"<li class='page-item {activeClass}'><a class='page-link' href='{urlBase}&page={i}'>{i}</a></li>");
+            //}
+
+            // Botón siguiente
             string nextDisabled = (pageIndex == totalPages) ? "disabled" : "";
             sb.Append($"<li class='page-item {nextDisabled}'>");
-            sb.Append($"<a class='page-link d-flex justify-content-center align-items-center' href='{urlBase}&page={pageIndex + 1}'>");
-            sb.Append("<img src='/lib/img/ImgIzqV55.png' alt='Siguiente' style='width:38px; height:38px;'>");
+            //sb.Append($"<a class='page-link d-flex justify-content-center align-items-center' href='{urlBase}&page={pageIndex + 1}'>");
+            //sb.Append("<img src='/lib/img/ImgIzqV55.png' alt='Siguiente' style='width:38px; height:38px;'>");
             sb.Append("</a></li>");
 
             sb.Append("</ul>");
@@ -284,7 +325,7 @@ namespace medcorponline
 
                
 
-                List<Auditoria> lista = negocio.ListarAtencionesFiltradasConPaginacionB(fechaInicioDT, fechaFinDT, idEmpresaSeleccionada, pageIndex, pageSize);
+                List<Auditoria> lista = negocio.ListarAtencionesFiltradasConPaginacionB(fechaInicioDT, fechaFinDT, idEmpresaSeleccionada, pageIndex, pageSize, out totalRecords);
 
                 // 3. Generar el archivo Excel.
                 Response.Clear();

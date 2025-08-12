@@ -329,9 +329,10 @@ namespace CAPA_DATOS
 
          //1. Método actualizado para listar atenciones con paginación
 
-        public List<Auditoria> ListarAtencionesFiltradasConPaginacionDB(DateTime? fechaInicio, DateTime? fechaFin, int? codCli, int pageIndex, int pageSize)
+        public List<Auditoria> ListarAtencionesFiltradasConPaginacionDB(DateTime? fechaInicio, DateTime? fechaFin, int? codCli, int pageIndex, int pageSize, out int totalRegistros)
         {
             List<Auditoria> lista = new List<Auditoria>();
+            totalRegistros = 0; // Inicializamos
 
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["cn"].ConnectionString))
             {
@@ -345,7 +346,19 @@ namespace CAPA_DATOS
                     cmd.Parameters.Add("@PageIndex", SqlDbType.Int).Value = pageIndex;
                     cmd.Parameters.Add("@PageSize", SqlDbType.Int).Value = pageSize;
 
+                    //// Parámetro de salida para el total de registros
+                    //SqlParameter outParam = new SqlParameter("@TotalRegistros", SqlDbType.Int)
+                    //{
+                    //    Direction = ParameterDirection.Output
+                    //};
+                    //cmd.Parameters.Add(outParam);
+                    // Parámetro de salida
+                    SqlParameter totalRegistrosParam = new SqlParameter("@TotalRegistros", SqlDbType.Int);
+                    totalRegistrosParam.Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add(totalRegistrosParam);
+
                     conn.Open();
+
                     using (SqlDataReader drDatos = cmd.ExecuteReader())
                     {
                         while (drDatos.Read())
@@ -362,6 +375,12 @@ namespace CAPA_DATOS
                             lista.Add(atencion);
                         }
                     }
+                    // Recuperar el valor del parámetro de salida
+                    //totalRegistros = (outParam.Value != DBNull.Value) ? Convert.ToInt32(outParam.Value) : 0;
+                    // Asignar valor al parámetro de salida
+                    totalRegistros = (cmd.Parameters["@TotalRegistros"].Value != DBNull.Value)
+                        ? Convert.ToInt32(cmd.Parameters["@TotalRegistros"].Value)
+                        : 0;
                 }
             }
             return lista;

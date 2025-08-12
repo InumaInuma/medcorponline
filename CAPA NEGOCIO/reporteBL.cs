@@ -55,9 +55,9 @@ namespace CAPA_NEGOCIO
 
         // 1. Método actualizado para listar atenciones con paginación
         // Ahora recibe el índice de página y el tamaño de página
-        public List<Auditoria> ListarAtencionesFiltradasConPaginacionB(DateTime? fechaInicio, DateTime? fechaFin, int? codCli, int pageIndex, int pageSize)
+        public List<Auditoria> ListarAtencionesFiltradasConPaginacionB(DateTime? fechaInicio, DateTime? fechaFin, int? codCli, int pageIndex, int pageSize, out int totalRegistros)
         {
-            return datos.ListarAtencionesFiltradasConPaginacionDB(fechaInicio, fechaFin, codCli, pageIndex, pageSize);
+            return datos.ListarAtencionesFiltradasConPaginacionDB(fechaInicio, fechaFin, codCli, pageIndex, pageSize, out totalRegistros);
         }
 
         public int ContarAtencionesFiltradasB(DateTime? fechaInicio, DateTime? fechaFin, int? codCli)
